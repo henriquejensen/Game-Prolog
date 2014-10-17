@@ -5,9 +5,10 @@
 friend('Marco Veio', [2,34,6]).
 friend('Jeremias', [1,20,12]).
 friend('Lindomar Sub-Zero', [3,15,99]).
+friend('Tiririca', [90]).
 
-find(Friend, []).
-find(Friend, Prize):- friend(Friend, [X|T]).
+find(Prize, [Prize|_]).
+find(Prize, [_|Rest]):- find(Prize, Rest).
 
-share(Friend, []).
-share(Friend, [Prize|Rest]):- share(Friend, Rest), find(Friend, Prize).
+share([]).
+share([Prize|Rest]):- share(Rest), friend(Friend, [X|T]), find(Prize, [X|T]), write(Friend+'\n'), !.
